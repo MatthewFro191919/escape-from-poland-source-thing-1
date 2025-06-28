@@ -419,13 +419,9 @@ class FlxAtlasFrames extends FlxFramesCollection
 	}
 	public function addAtlas(collection:FlxAtlasFrames, overwriteHash = false)
 	{
-		for (frame in collection.frames)
-			pushFrame(frame, overwriteHash);
-		
 		if (!usedGraphics.contains(collection.parent))
 		{
 			usedGraphics.push(collection.parent);
-			collection.parent.incrementUseCount();
 		}
 		
 		return this;
