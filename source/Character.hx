@@ -124,7 +124,7 @@ class Character extends FlxSprite
 
 				nativelyPlayable = true;
 
-				flipX = true;Add commentMore actions
+				flipX = true;
 			case 'Glitch':
 				frames = Paths.getMultiAtlas('characters/Glitch', 'shared');
 				
