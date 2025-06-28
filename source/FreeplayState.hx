@@ -19,9 +19,10 @@ import flixel.util.FlxStringUtil;
 import lime.utils.Assets;
 import flixel.FlxObject;
 import flixel.addons.util.FlxAsyncLoop;
-#if sys import sys.FileSystem; #end
-#if desktop import Discord.DiscordClient; #end
-import haxe.Json;
+#if desktop
+import sys.FileSystem;
+import Discord.DiscordClient;
+#end
 
 using StringTools;
 
@@ -37,7 +38,6 @@ class FreeplayState extends MusicBeatState
 
 	var scoreText:FlxText;
 	var diffText:FlxText;
-	var inftext:FlxText;
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
 
@@ -49,12 +49,10 @@ class FreeplayState extends MusicBeatState
 
 	private var CurrentSongIcon:FlxSprite;
 
-	private var Catagories:Array<String> = ['dave', 'joke', 'extras', 'cover', 'fanmade', 'mods'];
-	private var cTexts:String = "";
+	private var Catagories:Array<String> = ['dave', 'joke', 'extras'];
 	var translatedCatagory:Array<String> = [LanguageManager.getTextString('freeplay_dave'), LanguageManager.getTextString('freeplay_joke'), LanguageManager.getTextString('freeplay_extra')];
 
 	private var CurrentPack:Int = 0;
-	private var cTextsint:Int = 0;
 	private var NameAlpha:Alphabet;
 
 	var loadingPack:Bool = false;
@@ -63,7 +61,7 @@ class FreeplayState extends MusicBeatState
 	[
     	0xFF00137F,    // GF but its actually dave!
 		0xFF4965FF,    // DAVE
-		0xFF00B515,    // MISTER BAMBI RETARD (thats kinda rude ngl) [I agree]
+		0xFF00B515,    // MISTER BAMBI RETARD (thats kinda rude ngl)
 		0xFF00FFFF,    // SPLIT THE THONNNNN
 		0xFF800080,    // FESTIVAL
 		0xFF116E1C,    // MASTA BAMBI
@@ -78,32 +76,14 @@ class FreeplayState extends MusicBeatState
 		0xFF119A2B,    // CHEATING
 		0xFFFF0000,    // UNFAIRNESS
 		0xFF810000,    // EXPLOITATION
-		0xFF000000,    // Enter Terminal
-		0xFFCC5555,    // Electric-Cockaldoodledoo
-		0xFF008E00,    // longnosejohn
-		0xFFFFFFFF,    // cuzsiee
-		0xFF000000,    // dan
-		FlxColor.fromRGB(216, 176, 87), // Doge
-		0xFF810000,    // NOTEXPLOITATION
+		FlxColor.fromRGB(255, 51, 125),    // GLITCH.SMH
     ];
 	public static var skipSelect:Array<String> = 
 	[
 		'five-nights',
 		'vs-dave-rap',
 		'vs-dave-rap-two',
-		'confronting-yourself',
-		'cob',
-		'cuzsie-x-kapi-shipping-cute',
-		'oppression',
-		'bananacore',
-		'eletric-cockadoodledoo',
-		'electric-cockaldoodledoo',
-		'super-saiyan',
-		'foolhardy',
-		'doge-vs-bambi',
-		'old-too-slow',
-		'too-slow-encore',
-		'sporting'
+		'escape-from-poland'
 	];
 
 	public static var noExtraKeys:Array<String> = 
@@ -111,47 +91,8 @@ class FreeplayState extends MusicBeatState
 		'five-nights',
 		'vs-dave-rap',
 		'vs-dave-rap-two',
-		'roots',
-		'threedimensional',
-		'bf-ugh',
 		'overdrive',
-		'confronting-yourself',
-		'cob',
-		'cuzsie-x-kapi-shipping-cute',
-		'oppression',
-		'bananacore',
-		'eletric-cockadoodledoo',
-		'electric-cockaldoodledoo',
-		'super-saiyan',
-		'foolhardy',
-		'crop',
-		'popcorn',
-		'no-legs',
-		'blitz',
-		'importumania',
-		'rigged',
-		'old-house',
-		'old-insanity',
-		'furiosity',
-		'old-blocked',
-		'old-corn-theft',
-		'old-maze',
-		'beta-maze',
-		'old-splitathon',
-		'old-screwed',
-		'screwed-v2',
-		'secret',
-		'secret-mod-leak',
-		'vs-dave-thanksgiving',
-		'bonkers',
-		'duper',
-        'omission',
-		'doge-vs-bambi',
-		'bad-apple-srperez',
-		'vase',
-		'old-too-slow',
-		'too-slow-encore',
-		'sporting'
+		'escape-from-poland'
 	];
 
 	private var camFollow:FlxObject;
@@ -163,7 +104,7 @@ class FreeplayState extends MusicBeatState
 	var icons:Array<FlxSprite> = [];
 
 	var doneCoolTrans:Bool = false;
-	var customSongs = CoolUtil.coolTextFile(Paths.txt('coolCustomSongs'));
+
 	var defColor:FlxColor;
 	var canInteract:Bool = true;
 
@@ -176,29 +117,19 @@ class FreeplayState extends MusicBeatState
 	var pressUnlockNumber:Int;
 	var requiredKey:Array<Int>;
 	var stringKey:String;
-	public static var isaCustomSong:Bool = false;
 
 	var bgShader:Shaders.GlitchEffect;
 	var awaitingExploitation:Bool;
 	public static var packTransitionDone:Bool = false;
 	var characterSelectText:FlxText;
-	var reloadText:FlxText;
 	var showCharText:Bool = true;
-	public var blackbar:FlxSprite;
-	public var blackbar2:FlxSprite;
 
 	override function create()
 	{
-		#if not web
-		#end
-	//	Paths.clearStoredMemory();
-	//	Paths.clearUnusedMemory();
-
 		#if desktop DiscordClient.changePresence("In the Freeplay Menu", null); #end
 		
 		awaitingExploitation = (FlxG.save.data.exploitationState == 'awaiting');
 		showCharText = FlxG.save.data.wasInCharSelect;
-		isaCustomSong = false;
 
 		if (awaitingExploitation)
 		{
@@ -208,16 +139,14 @@ class FreeplayState extends MusicBeatState
 			bg.color = FlxColor.multiply(bg.color, FlxColor.fromRGB(50, 50, 50));
 			add(bg);
 			
-			if(FlxG.save.data.waving){
-				#if SHADERS_ENABLED
-				bgShader = new Shaders.GlitchEffect();
-				bgShader.waveAmplitude = 0.1;
-				bgShader.waveFrequency = 5;
-				bgShader.waveSpeed = 2;
-				
-				bg.shader = bgShader.shader;
-				#end
-			}
+			#if SHADERS_ENABLED
+			bgShader = new Shaders.GlitchEffect();
+			bgShader.waveAmplitude = 0.1;
+			bgShader.waveFrequency = 5;
+			bgShader.waveSpeed = 2;
+			
+			bg.shader = bgShader.shader;
+			#end
 			defColor = bg.color;
 		}
 		else
@@ -230,18 +159,12 @@ class FreeplayState extends MusicBeatState
 		}
 		if (FlxG.save.data.terminalFound && !awaitingExploitation)
 		{
-			Catagories = ['dave', 'joke', 'extras', 'dave2.5', 'classic', 'cover', 'fanmade', 'mods', 'terminal'];
-			//cTexts = ['Play the OG Story!', 'Play the Funnis', 'Play Some Extras', 'Play D&B Covers', 'Play Songs By The Community', 'Play Custom Songs', 'Get Accces to the Terminal'];
+			Catagories = ['dave', 'joke', 'extras', 'terminal'];
 			translatedCatagory = [
-				LanguageManager.getTextString('freeplay_dave'),
-				LanguageManager.getTextString('freeplay_joke'),
-				LanguageManager.getTextString('freeplay_extra'),
-				LanguageManager.getTextString('freeplay_dave2.5'),
-				LanguageManager.getTextString('freeplay_classic'),
-				LanguageManager.getTextString('freeplay_cover'),
-				LanguageManager.getTextString('freeplay_fanmade'),
-				LanguageManager.getTextString('freeplay_mods'),
-				LanguageManager.getTextString('freeplay_terminal')];
+			LanguageManager.getTextString('freeplay_dave'),
+			LanguageManager.getTextString('freeplay_joke'),
+			LanguageManager.getTextString('freeplay_extra'),
+			LanguageManager.getTextString('freeplay_terminal')];
 		}
 
 		for (i in 0...Catagories.length)
@@ -252,7 +175,7 @@ class FreeplayState extends MusicBeatState
 			CurrentSongIcon.centerOffsets(false);
 			CurrentSongIcon.x = (1000 * i + 1) + (512 - CurrentSongIcon.width);
 			CurrentSongIcon.y = (FlxG.height / 2) - 256;
-			CurrentSongIcon.antialiasing = FlxG.save.data.globalAntialiasing;
+			CurrentSongIcon.antialiasing = true;
 
 			var NameAlpha:Alphabet = new Alphabet(40, (FlxG.height / 2) - 282, translatedCatagory[i], true, false);
 			NameAlpha.x = CurrentSongIcon.x;
@@ -262,29 +185,6 @@ class FreeplayState extends MusicBeatState
 			add(NameAlpha);
 			titles.push(NameAlpha);
 		}
-
-		    blackbar = new FlxSprite(0, 550).makeGraphic(FlxG.width * 2, 300, FlxColor.BLACK);
-			blackbar.alpha = 0.5;
-			blackbar.scrollFactor.set();
-			add(blackbar);
-
-			reloadText = new FlxText(FlxG.width - 1125, FlxG.height, 0, 'Press R to reload', 18);
-			reloadText.setFormat("Comic Sans MS Bold", 18, FlxColor.WHITE, FlxTextAlign.RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			reloadText.borderSize = 1.5;
-			reloadText.antialiasing = FlxG.save.data.globalAntialiasing;
-			reloadText.scrollFactor.set();
-			reloadText.x -= reloadText.textField.textWidth;
-			reloadText.y -= reloadText.textField.textHeight;
-			add(reloadText);
-			
-			inftext = new FlxText(FlxG.width - 500, FlxG.height - 110, 0, cTexts /*'thus have le songs abcdefg'*/,  18);
-			inftext.setFormat("Comic Sans MS Bold", 28, FlxColor.WHITE, FlxTextAlign.RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			inftext.borderSize = 3.5;
-			inftext.antialiasing = FlxG.save.data.globalAntialiasing;
-			inftext.scrollFactor.set();
-			inftext.x -= inftext.textField.textWidth;
-			inftext.y -= inftext.textField.textHeight;
-			add(inftext);
 
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -335,7 +235,6 @@ class FreeplayState extends MusicBeatState
 
 					Catagories = ['uhoh'];
 					translatedCatagory = ['uh oh'];
-				//    cTexts = ['PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT'];
 					packTransitionDone = true;
 					canInteract = true;
 				}});
@@ -357,7 +256,6 @@ class FreeplayState extends MusicBeatState
 				titles[CurrentPack].setPosition(originalTitlePos.x, originalTitlePos.y);
 				
 				Catagories = ['uhoh'];
-				//cTexts = ['PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT PLAY IT'];
 				translatedCatagory = ['uh oh'];
 			}
 		}
@@ -369,116 +267,8 @@ class FreeplayState extends MusicBeatState
 	{
 		switch (Catagories[CurrentPack].toLowerCase())
 		{
-			case 'uhoh':
-				addWeek(['Exploitation'], 16, ['expunged']);
-			case 'dave':
-				addWeek(['Warmup'], 0, ['dave']);
-				addWeek(['House', 'Insanity', 'Polygonized'], 1, ['dave', 'dave-annoyed', 'dave-angey']);
-				addWeek(['Blocked', 'Corn-Theft', 'Maze'], 2, ['bambi-new', 'bambi-new', 'bambi-new']);
-				addWeek(['Splitathon'], 3, ['the-duo']);
-				addWeek(['Shredder', 'Greetings', 'Interdimensional', 'Rano'], 4, ['bambi-new', 'tristan-festival', 'dave-festival-3d', 'dave-festival']);
-			case 'joke':
-				if (FlxG.save.data.hasPlayedMasterWeek)
-				{
-					addWeek(['Supernovae', 'Glitch', 'Master'], 5, ['bambi-joke']);
-					addWeek(['Old-Supernovae', 'Old-Glitch'], 5, ['bambi-joke']);
-					addWeek(['Vs-Dave-Thanksgiving'], 5, ['bambi-joke']);
-				}				
-				if (!FlxG.save.data.terminalFound)
-				{
-					if (FlxG.save.data.cheatingFound)
-						addWeek(['Cheating'], 14, ['bambi-3d']);
-					if (FlxG.save.data.unfairnessFound)
-						addWeek(['Unfairness'], 15, ['bambi-unfair']);
-				}
-				if (FlxG.save.data.exbungoFound)
-					addWeek(['Kabunga'], 6, ['exbungo']);
-	
-				if (FlxG.save.data.oppressionFound)
-					addWeek(['Oppression'], 14, ['bambi-3d-old']);
-					
-				if (FlxG.save.data.roofsUnlocked)
-					addWeek(['Roofs'], 7, ['baldi']);
-	
-				if (FlxG.save.data.secretUnlocked)
-					addWeek(['Secret'], 5, ['marcello-dave']);
-	
-				if (FlxG.save.data.secretUnlocked)
-					addWeek(['Secret-Mod-Leak'], 7, ['baldi']);
-	
-				if (FlxG.save.data.electricCockaldoodledooUnlocked)
-					addWeek(['Bananacore', 'Eletric-Cockadoodledoo', 'Electric-Cockaldoodledoo'], 18, ['bananacoreicon', 'old-cicons', 'electricicons']);
-	
-				addWeek(['Vs-Dave-Rap'], 1, ['dave-cool']);
-				if(FlxG.save.data.vsDaveRapTwoFound)
-				{
-					addWeek(['Vs-Dave-Rap-Two'], 1, ['dave-cool']);
-				}
-			case 'extras':
-				if (FlxG.save.data.recursedUnlocked)
-				addWeek(['Recursed'], 10, ['recurser']);
-			    addWeek(['Bonus-Song'], 1, ['dave']);
-				addWeek(['Bonkers'], 19, ['longnosejohn']);
-				addWeek(['Roots'], 1, ['dave']);
-				addWeek(['Bot-Trot'], 9, ['playrobot']);
-				addWeek(['Escape-From-California'], 11, ['moldy']);
-				addWeek(['Five-Nights'], 12, ['dave']);
-				addWeek(['Adventure'], 8, ['tristan-opponent']);
-				addWeek(['Bf-Ugh'], 8, ['tristan-opponent']);
-				addWeek(['ThreeDimensional'], 8, ['tristan-opponent']);
-				addWeek(['Overdrive'], 13, ['dave-awesome']);
-				addWeek(['Mealie'], 2, ['bambi-loser']);
-				addWeek(['Indignancy'], 2, ['bambi-angey']);
-				addWeek(['Memory'], 1, ['dave']);	
-			case 'dave2.5':
-				addWeek(['House-2.5', 'Insanity-2.5', 'Polygonized-2.5'], 1, ['dave-2.5', 'dave-annoyed-2.5', 'dave-angey-old']);
-				addWeek(['Bonus-Song-2.5'], 1, ['dave-2.5']);
-				addWeek(['Blocked-2.5', 'Corn-Theft-2.5', 'Maze-2.5'], 2, ['bambi-scrapped-3.0', 'bambi-scrapped-3.0', 'bambi-scrapped-3.0']);
-			case 'classic':
-				addWeek(['Old-House', 'Old-Insanity', 'Furiosity'], 1, ['dave-pre-alpha', 'dave-pre-alpha', 'furiosity-dave']);
-				addWeek(['Old-Blocked', 'Old-Corn-Theft', 'Old-Maze', 'Beta-Maze'], 2, ['bambi-1.0', 'bambi-beta-2', 'bambi-beta-2', 'bambi-2.0']);
-				addWeek(['Old-Splitathon'], 3, ['the-duo-old']);
-				addWeek(['Old-Screwed', 'Screwed-V2'], 2, ['bambi-angey-old', 'bambi-angey-old']);
-			case 'fanmade':
-				addWeek(['Blitz', 'No-Legs'], 1, ['dave-annoyed', 'dave']);
-				addWeek(['Duper'], 2, ['bambi-angey', 'bambi-new']);
-				if (FlxG.save.data.importumaniaFound)
-					addWeek(['Importumania'], 14, ['importumania']);
-				addWeek(['omission'], 21, ['dan']);
-				addWeek(['Doge-Vs-Bambi'], 22, ['doge']);
-			case 'cover':
-				addWeek(['Confronting-Yourself'], 4, ['tristan-festival']);
-				addWeek(['Cob', 'Super-Saiyan'], 1, ['dave', 'dave-annoyed']);
-				addWeek(['Foolhardy'], 2, ['zardyMyBeloved']);
-				addWeek(['Vase'], 2, ['bambi-loser']);
-				addWeek(['sporting'], 2, ['bambi-new']);
-				addWeek(['too-slow-encore'], 23, ['bambi-new']);
-				addWeek(['Old-Too-Slow'], 2, ['bambi-angey-old']);
-				if (FlxG.save.data.electricCockaldoodledooUnlocked)
-					addWeek(['Cuzsie-X-Kapi-Shipping-Cute'], 20, ['cuzsiee']);
-			case 'terminal':
-				if (FlxG.save.data.cheatingFound)
-					addWeek(['Cheating'], 14, ['bambi-3d']);
-				if (FlxG.save.data.unfairnessFound)
-					addWeek(['Unfairness'], 15, ['bambi-unfair']);
-				if (FlxG.save.data.exploitationFound)
-					addWeek(['Exploitation'], 16, ['expunged']);
-				if (FlxG.save.data.cheatingFound)
-					addWeek(['Bad-Apple-srPerez'], 14, ['flandre']);
-
-				addWeek(['Enter Terminal'], 17, ['terminal']);
-				case 'mods':
-			#if sys
-			    isaCustomSong = true;
-				for (i in 0...customSongs.length)
-					{
-						var data:Array<String> = customSongs[i].split(':');
-						addCustomWeek([data[0]], Std.parseInt(data[1]), [data[2]]);
-					}
-					#else
-					addWeek(['YOU DONT HAVE SYS'], 0, ['dave']);
-                    addWeek(['Warmup'], 0, ['dave']);
-					#end
+			case 'extra':
+				addWeek(['Escape-From-Poland'], 17, ['Glitch']);
 		}
 	}
 
@@ -510,7 +300,7 @@ class FreeplayState extends MusicBeatState
 
 		scoreText = new FlxText(FlxG.width * 0.7, 0, 0, "", 32);
 		scoreText.setFormat(Paths.font("comic.ttf"), 32, FlxColor.WHITE, LEFT);
-		scoreText.antialiasing = FlxG.save.data.globalAntialiasing;
+		scoreText.antialiasing = true;
 		scoreText.y = -225;
 		scoreText.scrollFactor.set();
 
@@ -521,7 +311,7 @@ class FreeplayState extends MusicBeatState
 
 		diffText = new FlxText(scoreText.x, scoreText.y + 15, 0, "", 24);
 		diffText.setFormat(Paths.font("comic.ttf"), 24, FlxColor.WHITE, LEFT);
-		diffText.antialiasing = FlxG.save.data.globalAntialiasing;
+		diffText.antialiasing = true;
 		diffText.scrollFactor.set();
 
 		if (showCharText)
@@ -529,7 +319,7 @@ class FreeplayState extends MusicBeatState
 			characterSelectText = new FlxText(FlxG.width, FlxG.height, 0, LanguageManager.getTextString("freeplay_skipChar"), 18);
 			characterSelectText.setFormat("Comic Sans MS Bold", 18, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			characterSelectText.borderSize = 1.5;
-			characterSelectText.antialiasing = FlxG.save.data.globalAntialiasing;
+			characterSelectText.antialiasing = true;
 			characterSelectText.scrollFactor.set();
 			characterSelectText.alpha = 0;
 			characterSelectText.x -= characterSelectText.textField.textWidth;
@@ -570,29 +360,13 @@ class FreeplayState extends MusicBeatState
 	public function UpdatePackSelection(change:Int)
 	{
 		CurrentPack += change;
-
-		if (CurrentPack == -1) 
-		CurrentPack = Catagories.length - 1;
+		if (CurrentPack == -1)
+			CurrentPack = Catagories.length - 1;
 		
-		
-		if (CurrentPack == Catagories.length) 
+		if (CurrentPack == Catagories.length)
 			CurrentPack = 0;
-		
-
 
 		camFollow.x = icons[CurrentPack].x + 256;
-		
-	}
-
-	public function cTextsChange(change:Int)
-	{
-		cTextsint += change;
-
-		if (cTextsint < -1)
-			cTextsint = 0;
-
-		if (cTextsint == Catagories.length)
-			cTextsint = Catagories.length - 1;
 	}
 
 	override function beatHit()
@@ -616,64 +390,17 @@ class FreeplayState extends MusicBeatState
 				num++;
 		}
 	}
-
-	public function addCustomWeek(songs:Array<String>, weekNum:Int, ?songCharacters:Array<String>)
-		{
-			if (songCharacters == null)
-				songCharacters = ['bf'];
-	
-			var num:Int = 0;
-	
-			for (song in songs)
-			{
-				addSong(song, weekNum, songCharacters[num]);
-	
-				if (songCharacters.length != 1)
-					num++;
-			}
-		}
 	
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
-		if(FlxG.save.data.waving){
-			#if SHADERS_ENABLED
-			if (bgShader != null)
-			{
-				bgShader.shader.uTime.value[0] += elapsed;
-			}
-			#end
+		#if SHADERS_ENABLED
+		if (bgShader != null)
+		{
+			bgShader.shader.uTime.value[0] += elapsed;
 		}
-
-		if (cTextsint == 0) {
-			cTexts = 'Play the OG Story!';
-		} else if (cTextsint == 1) {
-			cTexts = 'Play the Funnis!';
-		} else if (cTextsint == 2) {
-			cTexts = 'Play Some Extras!';
-		} else if (cTextsint == 3) {
-			cTexts = 'Play D&B Covers!';
-		} else if (cTextsint == 4) {
-			cTexts = 'Play Songs By The Community!';
-		} else if (cTextsint == 5) {
-			cTexts = 'Play Custom Songs!';
-		} else if (cTextsint == 6) {
-			cTexts = 'Get Accces to the Terminal!';
-		} else {
-			cTexts = 'Erm what the filp';
-		}
-		
-
-		if (FlxG.keys.justPressed.R) // Reload for Custom Songs
-			{
-				FlxG.switchState(new FreeplayState());
-			}
-
-			/*if (FlxG.keys.justPressed.M) // Reload for Custom Songs
-				{
-					FlxG.switchState(new DownloadMods());
-				} */
+		#end
 
 		if (InMainFreeplayState)
 		{
@@ -720,14 +447,10 @@ class FreeplayState extends MusicBeatState
 			if (controls.LEFT_P && canInteract)
 			{
 				UpdatePackSelection(-1);
-				cTextsChange(-1);
-				trace(cTextsint);
 			}
 			if (controls.RIGHT_P && canInteract)
 			{
 				UpdatePackSelection(1);
-				cTextsChange(1);
-				trace(cTextsint);
 			}
 			if (controls.ACCEPT && !loadingPack && canInteract)
 			{
@@ -754,13 +477,10 @@ class FreeplayState extends MusicBeatState
 						loadingPack = false;
 					});
 				});
-				blackbar.visible = false;
-				inftext.visible = false;
 			}
 			if (controls.BACK && canInteract && !awaitingExploitation)
 			{
-				FlxG.sound.play(Paths.sound('cancelMenu'));
-				FlxG.switchState(new PlaySelectionState());
+				FlxG.switchState(new MainMenuState());
 			}
 
 			return;
@@ -783,12 +503,6 @@ class FreeplayState extends MusicBeatState
 				stringKey = 'down';
 				changeSelection(1);
 			}
-			if(FlxG.mouse.wheel != 0 && canInteract)
-				{
-					FlxG.sound.play(Paths.sound('scrollMenu'), 0.2);
-					stringKey = 'up';
-					changeSelection(-1 * FlxG.mouse.wheel);
-				}
 			if (controls.RIGHT_P)
 				changeDiff(1);
 			if (controls.LEFT_P)
@@ -796,7 +510,6 @@ class FreeplayState extends MusicBeatState
 			if (controls.BACK && canInteract)
 			{				
 				loadingPack = true;
-				isaCustomSong = false;
 				canInteract = false;
 				
 				for (i in grpSongs)
@@ -862,8 +575,6 @@ class FreeplayState extends MusicBeatState
 						iconArray = [];
 						curSelected = 0;
 						canInteract = true;
-					    blackbar.visible = true;
-						inftext.visible = true;
 					}});
 				}
 			}
@@ -875,14 +586,7 @@ class FreeplayState extends MusicBeatState
 						FlxG.switchState(new TerminalState());
 					default:
 						FlxG.sound.music.fadeOut(1, 0);
-						if (isaCustomSong) {
-						//var poop:String = CoolUtil.getSongFromJsons(songs[curSelected].songName.toLowerCase(), curDifficulty);
-						PlayState.SONG = Song.loadFromCustomJson(songs[curSelected].songName.toLowerCase()/*, curDifficulty*/);
-						trace("Custom");
-						} else {
 						PlayState.SONG = Song.loadFromJson(Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty));
-						trace("Not Custom :(");
-						}
 						PlayState.isStoryMode = false;
 						PlayState.storyDifficulty = curDifficulty;
 		
@@ -893,7 +597,7 @@ class FreeplayState extends MusicBeatState
 						PlayState.storyWeek = songs[curSelected].week;
 						
 						packTransitionDone = false;
-						if ((FlxG.keys.pressed.CONTROL || skipSelect.contains(PlayState.SONG.song.toLowerCase())) || PlayState.foePlay && !(PlayState.SONG.song.toLowerCase() == 'exploitation' && !FlxG.save.data.modchart))
+						if ((FlxG.keys.pressed.CONTROL || skipSelect.contains(PlayState.SONG.song.toLowerCase())) && !(PlayState.SONG.song.toLowerCase() == 'exploitation' && !FlxG.save.data.modchart))
 						{
 							if (curDifficulty == 0) {
 								if (PlayState.SONG.song.toLowerCase() == 'roofs') {
