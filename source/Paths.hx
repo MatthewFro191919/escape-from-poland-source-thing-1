@@ -424,7 +424,6 @@ class Paths
 		}
 		return getPackerAtlas(key);
 	}
-
 	static public function getMultiAtlas(keys:Array<String>, ?parentFolder:String = null, ?allowGPU:Bool = true):FlxAtlasFrames
 	{
 		
