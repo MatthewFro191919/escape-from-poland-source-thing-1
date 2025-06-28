@@ -400,7 +400,7 @@ class Paths
 
 	static public function getAtlas(key:String):FlxAtlasFrames
 	{
-		return FlxAtlasFrames.fromSparrow()
+		return FlxAtlasFrames.fromSparrow();
 		return FlxAtlasFrames.fromTexturePackerJson(myJson);
 		return getPackerAtlas(key);
 	}
