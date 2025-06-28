@@ -19,6 +19,8 @@ import haxe.xml.Access;
  */
 class FlxAtlasFrames extends FlxFramesCollection
 {
+	var usedGraphics:Array<FlxGraphic> = [];
+
 	public function new(parent:FlxGraphic, ?border:FlxPoint)
 	{
 		super(parent, FlxFrameCollectionType.ATLAS, border);
