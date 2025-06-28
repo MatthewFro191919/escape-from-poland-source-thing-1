@@ -124,6 +124,44 @@ class Character extends FlxSprite
 
 				nativelyPlayable = true;
 
+				flipX = true;Add commentMore actions
+			case 'Glitch':
+				frames = Paths.getMultiAtlas('characters/Glitch', 'shared');
+				
+				animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
+				animation.addByPrefix('singUP', 'Anims/Up-Sing', 24, false);
+				animation.addByPrefix('singLEFT', 'Anims/Left-Sing', 24, false);
+				animation.addByPrefix('singRIGHT', 'Anims/Right-Sing', 24, false);
+				animation.addByPrefix('singDOWN', 'Anims/Down-Sing', 24, false);
+
+				loadOffsetFile(curCharacter);
+
+				globalOffset = [-60, 350];
+				barColor = FlxColor.fromRGB(255, 51, 125);
+
+				playAnim('idle');
+
+				nativelyPlayable = false;
+
+				flipX = false;
+			case 'Issac':
+				frames = Paths.getSparrowAtlas('characters/issac', 'shared');
+				
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singUP', 'Sing_Up', 24, false);
+				animation.addByPrefix('singLEFT', 'Sing_Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Sing_Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Sing_Down', 24, false);
+
+				loadOffsetFile(curCharacter);
+
+				globalOffset = [0, 350];
+				barColor = FlxColor.fromRGB(0, 204, 255);
+
+				playAnim('idle');
+
+				nativelyPlayable = true;
+
 				flipX = true;
 			case 'nofriend':
 				frames = Paths.getSparrowAtlas('fiveNights/nofriend', 'shared');
