@@ -2080,6 +2080,24 @@ class PlayState extends MusicBeatState
 				sprites.add(bg);
 				add(bg);
 
+			case 'on a kickass airplane':
+				bgZoom = 0.3;
+				stageName = 'on a kickass airplane';
+
+				var sky:BGSprite = new BGSprite('sky', -3000, -1800, Paths.image('backgrounds/fish/octopus'), null, 0, 0);
+				sprites.add(sky);
+				sky.scrollFactor.set(0, 0);
+				sky.width = 4;
+				sky.height = 4;
+				add(sky);
+				
+				var plane:BGSprite = new BGSprite('plane', -9000, -2470, Paths.image('backgrounds/fish/bird'), null, 1, 1);
+				sprites.add(plane);
+				plane.scrollFactor.set(1, 1);
+				plane.width = 10;
+				plane.height = 10;
+				add(plane);
+
 			case 'farm' | 'farm-night' | 'farm-sunset':
 				bgZoom = 0.8;
 
