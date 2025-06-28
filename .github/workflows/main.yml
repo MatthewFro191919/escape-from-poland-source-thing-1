@@ -23,7 +23,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@main
 
-      - uses: krdlab/setup-haxe@master
+      - uses: krdlab/setup-haxe@main
         with:
           haxe-version: 4.2.5
       # Runs a set of commands using the runners shell
@@ -31,32 +31,12 @@ jobs:
         run: |
           haxelib setup C:/haxelib
           haxelib install hxcpp > nul
-          haxelib install lime 8.0.0
-          haxelib install openfl
-          haxelib install flixel 4.11.0
-          haxelib run lime setup flixel
-          haxelib run lime setup         
-          haxelib remove flixel-addons
-          haxelib remove flixel-tools
-          haxelib remove flixel-ui
-          haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib install flixel-addons 2.9.0
-          haxelib install tjson
-          haxelib install hxjsonast
-          haxelib install hxCodec 2.5.1          
-          haxelib install linc_luajit
-          haxelib install hscript
-          haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-          haxelib git faxe https://github.com/uhrobots/faxe
-          haxelib git polymod https://github.com/larsiusprime/polymod.git
-          haxelib install hxcpp-debug-server
-          haxelib list
+          .\"Bulid.bat"
         shell: cmd
+      - name: Create Version Tag
+        run: echo "${{github.run_id}}" > VERSION
       - name: Compile
-        run: haxelib run lime build windows -release
+        run: haxelib run lime build windows --app-version="4.0.0-${{ github.run_id}}"
       - name: Publish Artifact
         uses: actions/upload-artifact@main
         with:
