@@ -400,8 +400,6 @@ class Paths
 
 	static public function getAtlas(key:String):FlxAtlasFrames
 	{
-		return FlxAtlasFrames.fromSparrow();
-		return FlxAtlasFrames.fromTexturePackerJson(myJson);
 		return getPackerAtlas(key);
 	}
 	static public function getMultiAtlas(keys:Array<String>, ?parentFolder:String = null, ?allowGPU:Bool = true):FlxAtlasFrames
@@ -412,10 +410,6 @@ class Paths
 		{
 			var original:FlxAtlasFrames = parentFrames;
 			parentFrames = new FlxAtlasFrames(parentFrames.parent);
-			for (i in 1...keys.length)
-			{
-				var extraFrames:FlxAtlasFrames = Paths.getAtlas(keys[i].trim(), parentFolder, allowGPU);
-                        }
 		}
 		return parentFrames;
 	}
