@@ -2402,7 +2402,21 @@ class Character extends FlxSprite
 				barColor = FlxColor.fromRGB(186, 123, 66);
 
 				// GET SILLY (I think this will work)
-				default:
+				
+			case "glitch":
+				frames = Paths.getSparrowAtlas("spritemap1");
+				animation.addByPrefix("idle", "Idle-Forward", 24, true);
+				animation.addByPrefix("singLEFT", "Left-Sing", 24, false);
+				animation.addByPrefix("singDOWN", "Down-Sing", 24, false);
+				animation.addByPrefix("singUP", "Up-Sing", 24, false);
+				animation.addByPrefix("singRIGHT", "Right-Sing", 24, false);
+				playAnim("idle");
+				antialiasing = true;
+				scale.set(1, 1);
+				updateHitbox();
+				break;
+
+			default:
 				//var customPlayableChar = CoolUtil.coolTextFile(Paths.txt('CustomChars/' + curCharacter + '/anims'));
 				if (FileSystem.exists(Paths.txt('CustomChars/' + curCharacter))) {
 				var customPlayableChar = CoolUtil.coolTextFile(Paths.txt('CustomChars/' + curCharacter));
@@ -2547,7 +2561,21 @@ class Character extends FlxSprite
 					else
 						playAnim('danceLeft', true);
 				}
-				default:
+				
+			case "glitch":
+				frames = Paths.getSparrowAtlas("spritemap1");
+				animation.addByPrefix("idle", "Idle-Forward", 24, true);
+				animation.addByPrefix("singLEFT", "Left-Sing", 24, false);
+				animation.addByPrefix("singDOWN", "Down-Sing", 24, false);
+				animation.addByPrefix("singUP", "Up-Sing", 24, false);
+				animation.addByPrefix("singRIGHT", "Right-Sing", 24, false);
+				playAnim("idle");
+				antialiasing = true;
+				scale.set(1, 1);
+				updateHitbox();
+				break;
+
+			default:
 					playAnim('idle', true);
 			}
 			
