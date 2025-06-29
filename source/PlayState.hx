@@ -12390,7 +12390,6 @@ class PlayState extends MusicBeatState
 				switch (curBeat)
 				{
 					case 0:
-						makeInvisibleNotes(true);
 						defaultCamZoom += 0.4;
 				}
 			case 'escape-from-california':
