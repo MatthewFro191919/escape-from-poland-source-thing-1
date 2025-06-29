@@ -121,7 +121,7 @@ class Character extends FlxSprite {
 
 				flipX = true;
 			case 'Glitch':
-				frames = AnimateAtlas.buildFrames(Paths.image("characters/Glitch/spritemap1"), Paths.json("characters/Glitch/spritemap1"),
+				frames = AnimateAtlas.buildFrames(FlxG.bitmap.add(Paths.image("characters/Glitch/spritemap1")), Paths.json("characters/Glitch/spritemap1"),
 					Paths.json("characters/Glitch/Animation"));
 				animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
 				animation.addByPrefix('singUP', 'Anims/Up-Sing', 24, false);
