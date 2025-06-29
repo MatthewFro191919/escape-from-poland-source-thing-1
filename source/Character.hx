@@ -120,7 +120,7 @@ class Character extends FlxSprite {
 				nativelyPlayable = true;
 
 				flipX = true;
-			case 'Glitch':
+			case 'glitch':
 				frames = AnimateAtlas.buildFrames(FlxG.bitmap.add(Paths.image("characters/Glitch/spritemap1")), Paths.json("characters/Glitch/spritemap1"),
 					Paths.json("characters/Glitch/Animation"));
 				animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
@@ -139,7 +139,7 @@ class Character extends FlxSprite {
 				nativelyPlayable = false;
 
 				flipX = false;
-			case 'Issac':
+			case 'issac':
 				frames = Paths.getSparrowAtlas('characters/issac', 'shared');
 
 				animation.addByPrefix('idle', 'Idle', 24, false);
