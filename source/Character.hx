@@ -129,11 +129,11 @@ class Character extends FlxSprite
 			case 'Glitch':
 				frames = AnimateAtlas.buildFrames(Paths.image("characters/Glitch/spritemap1"), Paths.json("characters/Glitch/spritemap1"),
 					Paths.json("characters/Glitch/Animation"));
-				animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
-				animation.addByPrefix('singUP', 'Anims/Up-Sing', 24, false);
-				animation.addByPrefix('singLEFT', 'Anims/Left-Sing', 24, false);
-				animation.addByPrefix('singRIGHT', 'Anims/Right-Sing', 24, false);
-				animation.addByPrefix('singDOWN', 'Anims/Down-Sing', 24, false);
+                                animation.addBySymbol('idle', 'Anims/Idle-Forward', 24, false);
+				animation.addBySymbol('singUP', 'Anims/Up-Sing', 24, false);
+				animation.addBySymbol('singLEFT', 'Anims/Left-Sing', 24, false);
+				animation.addBySymbol('singRIGHT', 'Anims/Right-Sing', 24, false);
+				animation.addBySymbol('singDOWN', 'Anims/Down-Sing', 24, false);
 
 				loadOffsetFile(curCharacter);
 
