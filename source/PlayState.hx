@@ -12386,6 +12386,13 @@ class PlayState extends MusicBeatState
 					case 672:
 						crazyZooming = false;
 				}
+			case 'escape-from-poland':
+				switch (curBeat)
+				{
+					case 0:
+						makeInvisibleNotes(true);
+						defaultCamZoom += 0.4;
+				}
 			case 'escape-from-california':
 				switch (curBeat)
 				{
