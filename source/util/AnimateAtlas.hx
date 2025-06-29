@@ -32,40 +32,62 @@ class AnimateAtlas
             spriteIndex.set(spr.name, frame);
         }
 
-        // Parse timeline animation data
+        // Auto-detect and map animations from the top-level timeline
         var topLayer = animationData.AN.TL.L[0];
-        var frameAnims = new Map<String, Array<String>>();
+        var anims:Map<String, Array<String>> = new Map();
 
         for (frame in topLayer.FR)
         {
             for (element in frame.E)
             {
-                var symbol = element.SI.SN;
-                var tag = symbol.split("/").pop();
-                if (!frameAnims.exists(tag)) frameAnims.set(tag, []);
-                var spriteName = symbol;
-                var matched = ~/Parts\/(.+)/;
-                if (matched.match(spriteName))
-                {
-                    spriteName = matched.matched(1);
-                }
-                frameAnims.get(tag).push(spriteName);
+                var symbolPath = element.SI.SN;
+                var tag = symbolPath.split("/").pop();
+                if (!anims.exists(tag)) anims.set(tag, []);
+                anims.get(tag).push(tag);
             }
         }
 
-        // Add animations to FlxAtlasFrames
-        for (animName in frameAnims.keys())
+        // Also include Symbol Definitions if present (for parts like Idle-Forward, etc.)
+        var symbols = animationData.SD.S;
+        for (symbol in symbols)
         {
-            var frameNames = frameAnims.get(animName);
+            var name:String = symbol.SN.split("/").pop();
+            var symbolFrames:Array<String> = [];
+
+            if (symbol.TL != null && symbol.TL.L != null)
+            {
+                var layers = symbol.TL.L;
+                for (layer in layers)
+                {
+                    for (frame in layer.FR)
+                    {
+                        for (element in frame.E)
+                        {
+                            var frameName = null;
+                            if (element.SI != null)
+                                frameName = element.SI.SN.split("/").pop();
+                            else if (element.ASI != null)
+                                frameName = element.ASI.N;
+
+                            if (frameName != null)
+                                symbolFrames.push(frameName);
+                        }
+                    }
+                }
+            }
+
             var flxFrames:Array<FlxFrame> = [];
-            for (frameName in frameNames)
+            for (frameName in symbolFrames)
             {
                 if (spriteIndex.exists(frameName))
                     flxFrames.push(spriteIndex.get(frameName));
             }
 
             if (flxFrames.length > 0)
-                frames.addSpriteSheetAnimation(animName, flxFrames, 24);
+            {
+                // Auto-set FPS and loop if needed later
+                frames.addSpriteSheetAnimation(name, flxFrames, 24);
+            }
         }
 
         return frames;
