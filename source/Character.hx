@@ -126,7 +126,8 @@ class Character extends FlxSprite
 
 				flipX = true;
 			case 'Glitch':
-				frames = Paths.image(("characters/Glitch/spritemap1"), Paths.json("characters/Glitch/spritemap1", "shared/images"), Paths.json("characters/Glitch/Animation", "shared/images"));
+				frames = 
+				frames = Paths.image(("assets/shared/images/characters/Glitch/spritemap1"), Paths.json("assets/shared/images/characters/Glitch/spritemap1"), Paths.json("assets/shared/images/characters/Glitch/Animation"));
 				animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
 				animation.addByPrefix('singUP', 'Anims/Up-Sing', 24, false);
 				animation.addByPrefix('singLEFT', 'Anims/Left-Sing', 24, false);
