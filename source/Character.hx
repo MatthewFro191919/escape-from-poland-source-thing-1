@@ -83,6 +83,7 @@ class Character extends FlxSprite {
 				nativelyPlayable = true;
 
 				flipX = true;
+
 			case 'bf-3d':
 				frames = Paths.getSparrowAtlas('characters/3d_bf', 'shared');
 
@@ -121,13 +122,18 @@ class Character extends FlxSprite {
 
 				flipX = true;
 			case 'glitch':
-				frames = AnimateAtlas.buildFrames(FlxG.bitmap.add(Paths.image("characters/Glitch/spritemap1")), Paths.json("characters/Glitch/spritemap1"),
-					Paths.json("characters/Glitch/Animation"));
+				frames = AnimateAtlas.buildFrames(
+					Paths.image("characters/Glitch/spritemap1"),
+					Paths.json("characters/Glitch/spritemap1"),
+					Paths.json("characters/Glitch/Animation")
+				);
+
 				animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
 				animation.addByPrefix('singUP', 'Anims/Up-Sing', 24, false);
+				animation.addByPrefix('singDOWN', 'Anims/Down-Sing', 24, false);
 				animation.addByPrefix('singLEFT', 'Anims/Left-Sing', 24, false);
 				animation.addByPrefix('singRIGHT', 'Anims/Right-Sing', 24, false);
-				animation.addByPrefix('singDOWN', 'Anims/Down-Sing', 24, false);
+
 
 				loadOffsetFile(curCharacter);
 
