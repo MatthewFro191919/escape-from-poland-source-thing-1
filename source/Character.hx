@@ -16,9 +16,7 @@ import openfl.utils.Assets;
 using StringTools;
 
 class Character extends FlxSprite {
-	
-	var json:Dynamic;
-	
+
 	public var mostRecentRow:Int = 0;
 	public var animOffsets:Map<String, Array<Dynamic>>;
 	public var debugMode:Bool = false;
@@ -2348,8 +2346,6 @@ class Character extends FlxSprite {
 			// GET SILLY (I think this will work)
 			default:
 				// var customPlayableChar = CoolUtil.coolTextFile(Paths.txt('CustomChars/' + curCharacter + '/anims'));
-				var animToFind:String = Paths.getPath('images/' + json.image + '/Animation.json', TEXT);
-				if (Assets.exists(Paths.getPath('images/' + json.image + '/Animation.json', TEXT)))
 				if (FileSystem.exists(Paths.txt('CustomChars/' + curCharacter))) {
 					var customPlayableChar = CoolUtil.coolTextFile(Paths.txt('CustomChars/' + curCharacter));
 
