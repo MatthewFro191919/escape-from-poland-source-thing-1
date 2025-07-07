@@ -36,6 +36,11 @@
       "url": "https://github.com/FunkinCrew/flxanimate"
     },
     {
+      "name": "hxCodec",
+      "type": "haxelib",
+      "version": "2.5.1"
+    },
+    {
       "name": "format",
       "type": "haxelib",
       "version": "3.5.0"
