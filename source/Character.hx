@@ -123,7 +123,7 @@ class Character extends FlxSprite {
 
 				flipX = true;
 			case 'glitch':
-                                frames = new AtlasFrameMaker("assets/shared/images/characters/Glitch");
+                                frames = AtlasFrameMaker.construct('assets/shared/images/characters/Glitch');
 				animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
 				animation.addByPrefix('singUP', 'Anims/Up-Sing', 24, false);
 				animation.addByPrefix('singDOWN', 'Anims/Down-Sing', 24, false);
@@ -2344,6 +2344,7 @@ class Character extends FlxSprite {
 			// GET SILLY (I think this will work)
 			default:
 				// var customPlayableChar = CoolUtil.coolTextFile(Paths.txt('CustomChars/' + curCharacter + '/anims'));
+				if (Assets.exists(Paths.getPath('images/' + json.image + '/Animation.json', TEXT)))
 				if (FileSystem.exists(Paths.txt('CustomChars/' + curCharacter))) {
 					var customPlayableChar = CoolUtil.coolTextFile(Paths.txt('CustomChars/' + curCharacter));
 
