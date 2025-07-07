@@ -10,6 +10,7 @@ import flixel.FlxSprite;
 import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.tweens.FlxEase;
+import flxanimate.FlxAnimate;
 
 using StringTools;
 
@@ -122,12 +123,7 @@ class Character extends FlxSprite {
 
 				flipX = true;
 			case 'glitch':
-				frames = AnimateAtlas.buildFrames(
-					Paths.image("characters/Glitch/spritemap1"),
-					Paths.json("characters/Glitch/spritemap1"),
-					Paths.json("characters/Glitch/Animation")
-				);
-
+				frames = new FlxAnimate(0, 0, "assets/shared/images/characters/Glitch");
 				animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
 				animation.addByPrefix('singUP', 'Anims/Up-Sing', 24, false);
 				animation.addByPrefix('singDOWN', 'Anims/Down-Sing', 24, false);
