@@ -32,8 +32,8 @@ jobs:
           haxelib setup C:/haxelib
           haxelib install hxcpp > nul
           haxelib install hmm
-          .\"Bulid.bat"
           haxelib --global run hmm install -q
+          .\"Bulid.bat"
         shell: cmd
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
