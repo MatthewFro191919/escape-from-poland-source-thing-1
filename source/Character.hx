@@ -11,10 +11,14 @@ import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.tweens.FlxEase;
 import animateatlas.AtlasFrameMaker;
+import openfl.utils.Assets;
 
 using StringTools;
 
 class Character extends FlxSprite {
+	
+	var json:Dynamic = null;
+	
 	public var mostRecentRow:Int = 0;
 	public var animOffsets:Map<String, Array<Dynamic>>;
 	public var debugMode:Bool = false;
