@@ -17,7 +17,7 @@ using StringTools;
 
 class Character extends FlxSprite {
 	
-	var json:Dynamic = null;
+	var json:String = '';
 	
 	public var mostRecentRow:Int = 0;
 	public var animOffsets:Map<String, Array<Dynamic>>;
