@@ -10,7 +10,7 @@ import flixel.FlxSprite;
 import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.tweens.FlxEase;
-import flxanimate.FlxAnimate;
+import animateatlas.AtlasFrameMaker;
 
 using StringTools;
 
