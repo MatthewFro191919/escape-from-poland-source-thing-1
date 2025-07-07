@@ -8,20 +8,6 @@
       "url": "https://github.com/FunkinCrew/FlxPartialSound.git"
     },
     {
-      "name": "flixel",
-      "type": "git",
-      "dir": null,
-      "ref": "fffb1a74cf08f63dacc2ab09976340563f5b6e6d",
-      "url": "https://github.com/FunkinCrew/flixel"
-    },
-    {
-      "name": "flixel-addons",
-      "type": "git",
-      "dir": null,
-      "ref": "b9118f47f43a66bc0e5fbfcfd9903f0425e918ee",
-      "url": "https://github.com/FunkinCrew/flixel-addons"
-    },
-    {
       "name": "flixel-text-input",
       "type": "git",
       "dir": null,
@@ -79,27 +65,6 @@
       "url": "https://github.com/haxeui/haxeui-flixel"
     },
     {
-      "name": "hscript",
-      "type": "git",
-      "dir": null,
-      "ref": "27c86f9a761c1d16d4433c4cf252eccb7b2e18de",
-      "url": "https://github.com/FunkinCrew/hscript"
-    },
-    {
-      "name": "hxcpp",
-      "type": "git",
-      "dir": null,
-      "ref": "v4.3.75",
-      "url": "https://github.com/HaxeFoundation/hxcpp"
-    },
-    {
-      "name": "hxcpp-debug-server",
-      "type": "git",
-      "dir": "hxcpp-debug-server",
-      "ref": "147294123f983e35f50a966741474438069a7a8f",
-      "url": "https://github.com/FunkinCrew/hxcpp-debugger"
-    },
-    {
       "name": "hxdiscord_rpc",
       "type": "git",
       "dir": null,
@@ -145,13 +110,6 @@
       "url": "https://github.com/EliteMasterEric/jsonpath"
     },
     {
-      "name": "lime",
-      "type": "git",
-      "dir": null,
-      "ref": "be81ad7e4e1a92c3482bcc009648a4ac892cfa35",
-      "url": "https://github.com/FunkinCrew/lime"
-    },
-    {
       "name": "mconsole",
       "type": "git",
       "dir": null,
@@ -185,13 +143,6 @@
       "dir": null,
       "ref": "c8b30832027fa04f48fe6a45fa7903d5b265d56e",
       "url": "https://github.com/Geokureli/Newgrounds/"
-    },
-    {
-      "name": "openfl",
-      "type": "git",
-      "dir": null,
-      "ref": "d061c936b462f040304ec2bd42d9f59d2e59e285",
-      "url": "https://github.com/FunkinCrew/openfl"
     },
     {
       "name": "polymod",
