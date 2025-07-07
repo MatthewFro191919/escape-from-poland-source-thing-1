@@ -123,13 +123,12 @@ class Character extends FlxSprite {
 
 				flipX = true;
 			case 'glitch':
-				var sprite:FlxSprite = new FlxSprite(0,0);
-                                sprite.frames = new FlxAnimate("assets/shared/images/characters/Glitch");
-				sprite.animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
-				sprite.animation.addByPrefix('singUP', 'Anims/Up-Sing', 24, false);
-				sprite.animation.addByPrefix('singDOWN', 'Anims/Down-Sing', 24, false);
-				sprite.animation.addByPrefix('singLEFT', 'Anims/Left-Sing', 24, false);
-				sprite.animation.addByPrefix('singRIGHT', 'Anims/Right-Sing', 24, false);
+                                frames = new AtlasFrameMaker.construct("assets/shared/images/characters/Glitch");
+				animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
+				animation.addByPrefix('singUP', 'Anims/Up-Sing', 24, false);
+				animation.addByPrefix('singDOWN', 'Anims/Down-Sing', 24, false);
+				animation.addByPrefix('singLEFT', 'Anims/Left-Sing', 24, false);
+				animation.addByPrefix('singRIGHT', 'Anims/Right-Sing', 24, false);
 
 
 				loadOffsetFile(curCharacter);
@@ -141,7 +140,7 @@ class Character extends FlxSprite {
 
 				nativelyPlayable = false;
 
-				sprite.flipX = false;
+				flipX = false;
 			case 'issac':
 				frames = Paths.getSparrowAtlas('characters/issac', 'shared');
 
