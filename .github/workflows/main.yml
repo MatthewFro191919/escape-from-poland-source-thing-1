@@ -31,8 +31,6 @@ jobs:
         run: |
           haxelib setup C:/haxelib
           haxelib install hxcpp > nul
-          haxelib install hmm
-          haxelib --global run hmm install -q
           .\"Bulid.bat"
         shell: cmd
       - name: Create Version Tag
