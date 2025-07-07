@@ -123,7 +123,7 @@ class Character extends FlxSprite {
 
 				flipX = true;
 			case 'glitch':
-				var sprite:FlxSprite = new FlxSprite(X,Y);
+				var sprite:FlxSprite = new FlxSprite(0,0);
                                 sprite.frames = new FlxAnimate("assets/shared/images/characters/Glitch");
 				sprite.animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
 				sprite.animation.addByPrefix('singUP', 'Anims/Up-Sing', 24, false);
