@@ -123,12 +123,13 @@ class Character extends FlxSprite {
 
 				flipX = true;
 			case 'glitch':
-				frames = new FlxAnimate(0, 0, "assets/shared/images/characters/Glitch");
-				animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
-				animation.addByPrefix('singUP', 'Anims/Up-Sing', 24, false);
-				animation.addByPrefix('singDOWN', 'Anims/Down-Sing', 24, false);
-				animation.addByPrefix('singLEFT', 'Anims/Left-Sing', 24, false);
-				animation.addByPrefix('singRIGHT', 'Anims/Right-Sing', 24, false);
+				var sprite:FlxSprite = new FlxSprite(X,Y);
+                                sprite.frames = new FlxAnimate("assets/shared/images/characters/Glitch");
+				sprite.animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
+				sprite.animation.addByPrefix('singUP', 'Anims/Up-Sing', 24, false);
+				sprite.animation.addByPrefix('singDOWN', 'Anims/Down-Sing', 24, false);
+				sprite.animation.addByPrefix('singLEFT', 'Anims/Left-Sing', 24, false);
+				sprite.animation.addByPrefix('singRIGHT', 'Anims/Right-Sing', 24, false);
 
 
 				loadOffsetFile(curCharacter);
@@ -136,11 +137,11 @@ class Character extends FlxSprite {
 				globalOffset = [-60, 350];
 				barColor = FlxColor.fromRGB(255, 51, 125);
 
-				playAnim('idle');
+				sprite.playAnim('idle');
 
 				nativelyPlayable = false;
 
-				flipX = false;
+				sprite.flipX = false;
 			case 'issac':
 				frames = Paths.getSparrowAtlas('characters/issac', 'shared');
 
