@@ -10,7 +10,7 @@ import flixel.FlxSprite;
 import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.tweens.FlxEase;
-import flixel.graphics.frames.FlxFramesCollection;
+import flxanimate.FlxAnimate;
 
 using StringTools;
 
@@ -124,7 +124,7 @@ class Character extends FlxSprite {
 				flipX = true;
 			case 'glitch':
 				var sprite:FlxSprite = new FlxSprite(0,0);
-                                sprite.frames = new FlxFramesCollection("assets/shared/images/characters/Glitch");
+                                sprite.frames = new FlxAnimate("assets/shared/images/characters/Glitch");
 				sprite.animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
 				sprite.animation.addByPrefix('singUP', 'Anims/Up-Sing', 24, false);
 				sprite.animation.addByPrefix('singDOWN', 'Anims/Down-Sing', 24, false);
