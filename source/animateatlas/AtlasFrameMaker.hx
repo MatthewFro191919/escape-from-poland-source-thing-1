@@ -39,8 +39,8 @@ class AtlasFrameMaker extends FlxFramesCollection{
                 var frameCollection:FlxFramesCollection;
                 var frameArray:Array<Array<FlxFrame>> = [];
                 var animationData:AnimationData = Json.parse(Assets.getText(key + "/Animation.json"));
-                var atlasData:AtlasData = Json.parse(Assets.getText(key + "/spritemap.json").replace("\uFEFF", ""));//FIXED UTF8 w/ BOM error
-                var bitmapData:BitmapData = Assets.getBitmapData(key + "/spritemap.png");
+                var atlasData:AtlasData = Json.parse(Assets.getText(key + "/spritemap1.json").replace("\uFEFF", ""));//FIXED UTF8 w/ BOM error
+                var bitmapData:BitmapData = Assets.getBitmapData(key + "/spritemap1.png");
                 var ss = new SpriteAnimationLibrary(animationData, atlasData, bitmapData);
                 var t = ss.createAnimation();
                 if(_excludeArray == null){
@@ -113,8 +113,8 @@ class AtlasFrameMaker extends FlxFramesCollection{
         /*public static function renderTest(key:String, animation:String, ?frame:Int = 0):Void
         {
                 var animationData:AnimationData = Json.parse(Assets.getText(key + "/Animation.json"));
-                var atlasData:AtlasData = Json.parse(Assets.getText(key + "/spritemap.json"));
-                var bitmapData:BitmapData = Assets.getBitmapData(key + "/spritemap.png");
+                var atlasData:AtlasData = Json.parse(Assets.getText(key + "/spritemap1.json"));
+                var bitmapData:BitmapData = Assets.getBitmapData(key + "/spritemap1.png");
                 var ss = new SpriteAnimationLibrary(animationData, atlasData, bitmapData);
                 var t = ss.createAnimation();
                 var bitMapArray:Array<BitmapData> = [];
