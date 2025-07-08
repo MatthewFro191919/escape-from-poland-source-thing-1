@@ -89,10 +89,10 @@ class FlxAnimateFrames extends FlxAtlasFrames
         else
         {
             #if sys
-            var texts = sys.FileSystem.readDirectory(Path).filter((text) -> text.startsWith('spritemap') && text.toLowerCase().endsWith('.json'));
+            var texts = sys.FileSystem.readDirectory(Path).filter((text) -> text.startsWith('spritemap1') && text.toLowerCase().endsWith('.json'));
             for(i in 0...texts.length) texts[i] = '$Path/' + texts[i];
             #else
-            var texts = Assets.list(TEXT).filter((text) -> StringTools.startsWith(text, '$Path/spritemap'));
+            var texts = Assets.list(TEXT).filter((text) -> StringTools.startsWith(text, '$Path/spritemap1'));
             #end
             if (texts.length > 1)
             {
