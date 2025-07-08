@@ -125,7 +125,7 @@ class Character extends FlxSprite {
 
 				flipX = true;
 			case 'glitch':
-                                frames = AtlasFrameMaker.construct('assets/shared/images/characters/Glitch');
+                                frames = AtlasFrameMaker.construct('assets/images/TextureAtlas/Glitch');
 				animation.addByPrefix('idle', 'Anims/Idle-Forward', 24, false);
 				animation.addByPrefix('singUP', 'Anims/Up-Sing', 24, false);
 				animation.addByPrefix('singDOWN', 'Anims/Down-Sing', 24, false);
