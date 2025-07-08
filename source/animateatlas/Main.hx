@@ -35,8 +35,8 @@ class Main extends Sprite {
 		graphics.drawRect(0, 0, Lib.current.stage.stageWidth, Lib.current.stage.stageHeight);
 
 		var animationData:AnimationData = Json.parse(Assets.getText("assets/TEST/Animation.json"));
-		var atlasData:AtlasData = Json.parse(Assets.getText("assets/TEST/spritemap.json"));
-		var bitmapData:BitmapData = Assets.getBitmapData("assets/TEST/spritemap.png");
+		var atlasData:AtlasData = Json.parse(Assets.getText("assets/TEST/spritemap1.json"));
+		var bitmapData:BitmapData = Assets.getBitmapData("assets/TEST/spritemap1.png");
 
 		aa = new TileAnimationLibrary(animationData, atlasData, bitmapData);
 		ss = new SpriteAnimationLibrary(animationData, atlasData, bitmapData);
