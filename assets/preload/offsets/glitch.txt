@@ -1,5 +1,5 @@
-idle -315 -420
-singUP -314, -421
-singRIGHT -316, -422
-singLEFT -316, -417
-singDOWN -311, -420
+idle -315, -420
+singUP -187, -143
+singRIGHT -356, -372
+singLEFT -246, -347
+singDOWN -291, -440
