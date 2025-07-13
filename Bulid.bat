@@ -46,7 +46,7 @@ haxelib remove flixel-addons
 haxelib remove flixel-tools
 haxelib install flixel 4.11.0
 haxelib install lime 8.1.2
-haxelib install openfl 9.3.0
+haxelib install openfl 9.3.3
 haxelib install flixel-tools
 haxelib install flixel-ui
 haxelib install flixel-addons 2.9.0
