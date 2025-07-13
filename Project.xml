@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://lime.openfl.org/project/1.0.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/xsd/project-1.0.4.xsd">
-
+<project>
 	<!-- _________________________ Application Settings _________________________ -->
 
 	<app title="Friday Night Funkin' | VS. Dave and Bambi 3.0b | Extra Keys Addon 2.0.2 | Plus Beta 1.0 | Plus Reformed 1.0.0 FINAL?" file="VsDavePlusReformed" packageName="dnbplus.daveandbambiplus" package="dnbplus.daveandbambiplus" main="Main" version="3.0.0" company="dnbplus"/>
