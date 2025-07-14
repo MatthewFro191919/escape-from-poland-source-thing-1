@@ -4,7 +4,7 @@ cd ..
 
 echo Installing dependencies, please wait...
 haxelib install lime 8.1.2
-haxelib install openfl 9.3.3
+haxelib git openfl https://github.com/player-03/openfl 723c2f579a5c32b01d447ff9609a524a6af769cc
 haxelib install flixel 4.11.0
 haxelib install flixel-addons 2.11.0
 haxelib install flixel-tools
