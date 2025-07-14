@@ -66,6 +66,7 @@
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />
+	<haxelib name="flxanimate" />
 	<haxedev set='webgl' />
 	<haxelib name="flixel-addons" />
 	<haxelib name="hscript" />
