@@ -66,6 +66,10 @@ import lime.media.AudioSource;
 	@:noCompletion private var __source:AudioSource;
 	#end
 
+	#if lime
+	@:noCompletion private var __audioSource:AudioSource;
+	#end
+
 	#if openfljs
 	@:noCompletion private static function __init__()
 	{
