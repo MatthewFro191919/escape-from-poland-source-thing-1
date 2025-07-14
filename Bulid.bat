@@ -3,8 +3,6 @@ title Setup - PECG
 cd ..
 
 echo Installing dependencies, please wait...
-haxelib setup C:/haxelib
-haxelib install hxcpp > nul
 haxelib install lime 8.0.0
 haxelib install openfl
 haxelib install flixel 4.11.0
